@@ -1,25 +1,33 @@
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-function AddModal({show, handleClose, doctorName}) {
-    const [patientName,setPatientName] = useState("")
-    const [date,setDate] = useState("")
-    const handleSubmit = () => {
-        
-    }
+function AddModal({show, handleClose, doctorName, setAppointments, appointments}) {
   
 
-
+  
   const handleShow = () => setShow(true);
+  const [patientName, setPatientName] = useState("")
+  const [date, setDate] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setAppointments(
+      [...appointments, {
+        id: appointments +1,
+        patient: patientName,
+        day: date,
+        consulted: false,
+        doctor: doctorName,
+      }]
+    )
+    handleClose()
+  }
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Appointment for {doctorName}</Modal.Title>
@@ -30,7 +38,7 @@ function AddModal({show, handleClose, doctorName}) {
               <Form.Label>Patient Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your name"
+                placeholder="enter the patient's name"
                 autoFocus
                 onChange={(e) => setPatientName(e.target.value)}
               />
@@ -45,16 +53,14 @@ function AddModal({show, handleClose, doctorName}) {
                 onChange={(e) => setDate(e.target.value)}
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
+            <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" type='submit'>
             Save Changes
           </Button>
-        </Modal.Footer>
+          </Form>
+        </Modal.Body>
       </Modal>
     </>
   );

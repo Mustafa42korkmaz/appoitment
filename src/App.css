@@ -1,0 +1,29 @@
+.appointments{
+    width: 100%;
+    border-radius: 0.3rem;
+    position: relative;
+    max-width: 1200px;
+    min-width: 275px;
+    padding: 1rem;
+    box-shadow: 0px 3px 3px rgba(0,0,0,0.3);
+    margin-bottom: 1rem;
+    text-align: center;
+    background-image: linear-gradient(135deg, #eef2f7 0%, #cad5e6 100%);
+}
+
+.consulted{
+    border-left: 1rem solid blueviolet ;
+}
+
+.consulted::after{
+    content: "CONSULTED" ;
+    color: #fff;
+    background-color: blueviolet;
+    border-radius: 1rem;
+    font-size: 2rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem;
+}
